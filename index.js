@@ -1,8 +1,9 @@
-import chalk from 'chalk';
-import colors from 'colors';
+import http from 'http';
+import apiData from './api-data.js';
+const api_Data = new apiData();
 
-// var clrs = require('colors')
-console.log("hello".red)
-
-// var chalk = require('chalk')
-console.log(chalk.blue("hello"))
+http.createServer((req,res)=> {
+    res.writeHead(200,'OK',{'Content-Type':'application\json'});
+    res.write(JSON.stringify(api_Data.data));
+    res.end();
+}).listen(5000);
