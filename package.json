@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Node JS tutorial",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/Shreya339/node-js-project/issues"
   },
-  "homepage": "https://github.com/Shreya339/node-js-project#readme"
+  "homepage": "https://github.com/Shreya339/node-js-project#readme",
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "colors": "^1.4.0"
+  }
 }
