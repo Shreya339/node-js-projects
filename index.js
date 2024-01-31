@@ -1,8 +1,17 @@
-import chalk from 'chalk';
-import colors from 'colors';
+import * as fs from 'fs';
 
-// var clrs = require('colors')
-console.log("hello".red)
+const consInput = process.argv; //'process' is an object
 
-// var chalk = require('chalk')
-console.log(chalk.blue("hello"))
+if(consInput[2]=='create'){
+    fs.writeFileSync(consInput[3],consInput[4]);
+} 
+else if(consInput[2]=='delete'){
+    fs.unlinkSync(consInput[3]);
+}
+else{
+    console.log('Invalid input');
+}
+
+/* To run, we give the command as 
+node index.js create new_test_file.txt 'this is a new text file'
+*/
