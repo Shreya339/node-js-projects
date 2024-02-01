@@ -57,3 +57,15 @@ app.use('/static', express.static('public')) */
 
 //give the route as /about.html
 //if no route is given, index.html gets rendered by default
+
+/* Lets create a virtual path now  
+Paths are matched in the order they are written */
+app.get('',(_,res)=>{
+    res.sendFile(`${publicPath}/index.html`)
+});
+app.get('/aboutme',(_,res)=>{
+    res.sendFile(`${publicPath}/about.html`)
+});
+app.get('*',(_,res)=>{
+    res.sendFile(`${publicPath}/pagenotfound.html`)
+});
