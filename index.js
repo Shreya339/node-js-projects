@@ -1,8 +1,38 @@
-import chalk from 'chalk';
-import colors from 'colors';
+import express from 'express';
 
-// var clrs = require('colors')
-console.log("hello".red)
+/* Create API and send response */
+const express_obj = new express();
+express_obj.get('', (req, res) => {
+    res.send("<h1>Welcome to the home page<h1>")
+})
 
-// var chalk = require('chalk')
-console.log(chalk.blue("hello"))
+/* Reading request parameters */
+express_obj.get('/about', (req, res) => {
+    console.log("Data sent by request is", req.query.name)
+    res.send("Welcome to the about page")
+})
+
+/* Sending html as response */
+express_obj.get('/htmlresponse', (req, res) => {
+    // go to about page and display query param
+    res.send(`
+    <input type='text' placeholder='username' value=${req.query.name}>
+    <a href="/about"> <button>Click me</button></a href> 
+    `)
+})
+
+/* Sending json response */
+express_obj.get('/jsonresponse', (req, res) => {
+    res.send([
+        {
+            name: 'john',
+            email: 'john@gmail.com'
+        },
+        {
+            name: 'peter',
+            email: 'peter@gmail.com'
+        }
+    ]
+    )
+})
+express_obj.listen(5000)
