@@ -1,8 +1,19 @@
-import chalk from 'chalk';
-import colors from 'colors';
 
-// var clrs = require('colors')
-console.log("hello".red)
+/* example of asynchronous function execution */
+let a=10;
+let b=20;
+// setTimeout(()=>{
+//     b=30;
+// },2000);
+// console.log(a+b);
 
-// var chalk = require('chalk')
-console.log(chalk.blue("hello"))
+const waitingData = new Promise((resolve,reject)=>{
+    setTimeout(()=>{
+        resolve(30)  //write the function that executes slowly here and pass the final value inside resolve()
+    },2000)
+})
+
+waitingData.then((data)=>{
+    b=data;
+    console.log(a+b);
+})
