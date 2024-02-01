@@ -1,19 +1,21 @@
 import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 /* Create API and send response */
-const express_obj = new express();
-express_obj.get('', (req, res) => {
+const app = new express();
+app.get('', (req, res) => {
     res.send("<h1>Welcome to the home page<h1>")
 })
 
 /* Reading request parameters */
-express_obj.get('/about', (req, res) => {
+app.get('/about', (req, res) => {
     console.log("Data sent by request is", req.query.name)
     res.send("Welcome to the about page")
 })
 
 /* Sending html as response */
-express_obj.get('/htmlresponse', (req, res) => {
+app.get('/htmlresponse', (req, res) => {
     // go to about page and display query param
     res.send(`
     <input type='text' placeholder='username' value=${req.query.name}>
@@ -22,7 +24,7 @@ express_obj.get('/htmlresponse', (req, res) => {
 })
 
 /* Sending json response */
-express_obj.get('/jsonresponse', (req, res) => {
+app.get('/jsonresponse', (req, res) => {
     res.send([
         {
             name: 'john',
@@ -35,4 +37,23 @@ express_obj.get('/jsonresponse', (req, res) => {
     ]
     )
 })
-express_obj.listen(5000)
+app.listen(5000)
+
+// ----------------------------------------------------------------------------------------------
+
+/* Rendering entire multiple html pages from different folder */
+
+const filepath = fileURLToPath(import.meta.url); //meta-property exposes context-specific metadata to a JavaScript module.
+let directory = path.dirname(filepath);
+let publicPath = path.join(directory,'public');
+
+// express.static built-in middleware function To serve static files: express.static(root, [options])
+
+app.use(express.static(publicPath));
+
+/* To create a virtual path prefix (where the path does not actually exist in the file system) for files that are 
+served by the express.static function, specify a mount path for the static directory, as shown below:
+app.use('/static', express.static('public')) */
+
+//give the route as /about.html
+//if no route is given, index.html gets rendered by default
