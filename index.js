@@ -1,6 +1,7 @@
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import ejs from 'ejs';
 
 /* Create API and send response */
 const app = new express();
@@ -58,6 +59,7 @@ app.use('/static', express.static('public')) */
 //give the route as /about.html
 //if no route is given, index.html gets rendered by default
 
+//---------------------------------------------------------------------------------------------------
 /* Lets create a virtual path now  
 Paths are matched in the order they are written */
 app.get('',(_,res)=>{
@@ -66,6 +68,24 @@ app.get('',(_,res)=>{
 app.get('/aboutme',(_,res)=>{
     res.sendFile(`${publicPath}/about.html`)
 });
-app.get('*',(_,res)=>{
-    res.sendFile(`${publicPath}/pagenotfound.html`)
+// app.get('*',(_,res)=>{
+//     res.sendFile(`${publicPath}/pagenotfound.html`)
+// });
+
+//-----------------------------------------------------------------------------------------------------
+
+/* Template Engine */
+app.set('view engine', 'ejs');
+
+//we need to manually create a folder named views and profile.ejs
+
+app.get('/profile',(req,res)=>{
+    const user={
+        name:'John',
+        email:'john@test.com',
+        Country:'USA'
+    }
+    // console.error({user})
+    // console.error(user)
+    res.render('profile',{user})
 });
