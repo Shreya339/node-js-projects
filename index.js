@@ -89,3 +89,7 @@ app.get('/profile',(req,res)=>{
     // console.error(user)
     res.render('profile',{user})
 });
+
+app.get('/login', (req,res)=> {
+    res.render('login')
+})
