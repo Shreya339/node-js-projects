@@ -1,10 +1,11 @@
 import express from 'express' ;
+import reqFilter from './middleware.js';
 const app = new express();
 
 app.listen('5000')
 
-/* Creating a Application level Middleware- applied on all routes */  
-const reqFilter = (req,res,next)=>{
+/* Creating a Application level Middleware- applied on all routes in same file*/  
+/* const reqFilter = (req,res,next)=>{
     if(!req.query.age){
         res.send("Please provide age")
     } 
@@ -14,7 +15,7 @@ const reqFilter = (req,res,next)=>{
     else {
         next();  //if this is not present,browser never finishes loading and not able to route
     }
-}
+} */
 
 // ----------------------------------------------------------------------------------------
 
