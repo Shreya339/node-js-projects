@@ -38,5 +38,21 @@ app.get('/about',reqFilter,(req,res)=>{
     res.send("Welcome to about page")
 })
 
+/* Middleware on a specific group of routes */
+
+const route = express.Router();
+route.use(reqFilter)
+app.use('/',route);
+
+route.get('/contact',(req,res)=>{
+    res.send("Welcome to Contact page")
+})
+
+route.get('/feedback',(req,res)=>{
+    res.send("Welcome to Feedback page")
+})
+
+
+
 
 
