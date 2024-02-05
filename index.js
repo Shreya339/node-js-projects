@@ -1,8 +1,19 @@
-import chalk from 'chalk';
-import colors from 'colors';
+import { connectDb } from "./mongo-connection.js";;
 
-// var clrs = require('colors')
-console.log("hello".red)
+/* 2 ways to handle promise -Old*/
 
-// var chalk = require('chalk')
-console.log(chalk.blue("hello"))
+/* 1.Using .then() */
+connectDb().then((resp)=>{
+    resp.find({}).toArray().then((data)=>{
+        console.log(data);
+    });
+})
+
+/* 2.Using async await - Latest*/
+async function main(){
+    let data = await connectDb();
+    data = await data.find({}).toArray();
+    console.log(data);
+}
+
+main();
